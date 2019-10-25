@@ -120,7 +120,7 @@ resource "aws_security_group_rule" "this_ingress_sg_1025_65535" {
   type                     = "ingress"
   from_port                = 1025
   to_port                  = 65535
-  protocol                 = tcp
+  protocol                 = "tcp"
   security_group_id        = element(concat(aws_security_group.this.*.id, list("")), 0)
   source_security_group_id = each.key
 }
@@ -131,7 +131,7 @@ resource "aws_security_group_rule" "client_egress_sg_1025_65535" {
   type                     = "egress"
   from_port                = 1025
   to_port                  = 65535
-  protocol                 = tcp
+  protocol                 = "tcp"
   source_security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
   security_group_id        = each.key
 }
@@ -142,7 +142,7 @@ resource "aws_security_group_rule" "this_ingress_cidrs_1025_65535" {
   type              = "ingress"
   from_port         = 1025
   to_port           = 65535
-  protocol          = tcp
+  protocol          = "tcp"
   security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
   cidr_blocks       = var.allowed_cidr_blocks
 }
@@ -155,7 +155,7 @@ resource "aws_security_group_rule" "this_ingress_self_any" {
   to_port           = 0
   protocol          = "-1"
   self              = true
-  security_group_id = aws_security_group.this.id
+  security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
 }
 
 # NOTE: This might not be usefull or necessary but is what is usually done.
@@ -167,7 +167,7 @@ resource "aws_security_group_rule" "this_egress_any" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.this.id
+  security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
 }
 
 #####
