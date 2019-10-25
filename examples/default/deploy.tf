@@ -13,7 +13,7 @@ data "aws_vpc" "default" {
   default = true
 }
 
-data "aws_security_groups" {
+data "aws_security_groups" "this" {
   filter {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
@@ -32,6 +32,8 @@ resource "random_string" "this" {
 }
 
 module "eks_worker_pool" {
+  source = "../../"
+
   autoscaling_group_name = random_string.this.result
 
   # NOTE: These values will not make a functionning cluster. These should be
@@ -40,7 +42,7 @@ module "eks_worker_pool" {
   cluster_certificate       = random_string.this.result
   cluster_endpoint          = random_string.this.result
   cluster_name              = random_string.this.result
-  cluster_security_group_id = aws_security_groups.0.id
+  cluster_security_group_id = data.aws_security_groups.this[0].id
 
   iam_role_name             = random_string.this.result
   iam_instance_profile_name = random_string.this.result
@@ -49,5 +51,5 @@ module "eks_worker_pool" {
 
   security_group_name = random_string.this.result
 
-  subnet_ids = tolist(data.aws_subnets.this.ids)
+  subnet_ids = tolist(data.aws_subnet_ids.this.ids)
 }

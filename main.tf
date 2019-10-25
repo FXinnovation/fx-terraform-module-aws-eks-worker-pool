@@ -33,7 +33,7 @@ locals {
 #####
 
 resource "aws_launch_configuration" "this" {
-  count = var.enabeld ? 1 : 0
+  count = var.enabled ? 1 : 0
 
   associate_public_ip_address = var.associate_public_ip_address
   iam_instance_profile        = element(concat(aws_iam_instance_profile.this.*.name, list("")), 0)
@@ -52,10 +52,14 @@ resource "aws_launch_configuration" "this" {
       }
     )
   )
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_autoscaling_group" "this" {
-  count = var.enabeld ? 1 : 0
+  count = var.enabled ? 1 : 0
 
   desired_capacity     = var.autoscaling_group_desired_capacity
   launch_configuration = element(concat(aws_launch_configuration.this.*.id, list("")), 0)
@@ -97,7 +101,7 @@ resource "aws_autoscaling_group" "this" {
 #####
 
 resource "aws_security_group" "this" {
-  count = var.enabeld ? 1 : 0
+  count = var.enabled ? 1 : 0
 
   name        = var.security_group_name
   description = "Security group for EKS workers."
@@ -132,7 +136,7 @@ resource "aws_security_group_rule" "client_egress_sg_1025_65535" {
   security_group_id        = each.key
 }
 
-resource "aws_secuirty_group_rule" "this_ingress_cidrs_1025_65535" {
+resource "aws_security_group_rule" "this_ingress_cidrs_1025_65535" {
   count = var.enabled ? 1 : 0
 
   type              = "ingress"
@@ -151,7 +155,7 @@ resource "aws_security_group_rule" "this_ingress_self_any" {
   to_port           = 0
   protocol          = "-1"
   self              = true
-  security_group_id = aws_security_group.this_worker.id
+  security_group_id = aws_security_group.this.id
 }
 
 # NOTE: This might not be usefull or necessary but is what is usually done.
@@ -163,7 +167,7 @@ resource "aws_security_group_rule" "this_egress_any" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.this_worker.id
+  security_group_id = aws_security_group.this.id
 }
 
 #####
@@ -196,21 +200,21 @@ POLICY
 }
 
 resource "aws_iam_role_policy_attachment" "this_node_policy" {
-  count = var.enabeld ? 1 : 0
+  count = var.enabled ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = element(concat(aws_iam_role.this.*.name, list("")), 0)
 }
 
 resource "aws_iam_role_policy_attachment" "this_cni_policy" {
-  count = var.enabeld ? 1 : 0
+  count = var.enabled ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   role       = element(concat(aws_iam_role.this.*.name, list("")), 0)
 }
 
 resource "aws_iam_role_policy_attachment" "this_container_registry" {
-  count = var.enabeld ? 1 : 0
+  count = var.enabled ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = element(concat(aws_iam_role.this.*.name, list("")), 0)
