@@ -2,6 +2,7 @@
 0.1.0 / 2019-10-25
 ==================
 
+  * Fix: Allowing for empty list in allowed_cidr_blocks
   * Fix: Typo in variable name
   * Fix: Problem with datasource in example
   * fix: typo fixes eveywhere

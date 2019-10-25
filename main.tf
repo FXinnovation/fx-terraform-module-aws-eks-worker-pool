@@ -137,7 +137,7 @@ resource "aws_security_group_rule" "client_egress_sg_1025_65535" {
 }
 
 resource "aws_security_group_rule" "this_ingress_cidrs_1025_65535" {
-  count = var.enabled ? 1 : 0
+  count = var.enabled && length(var.allowed_cidr_blocks) > 0 ? 1 : 0
 
   type              = "ingress"
   from_port         = 1025
