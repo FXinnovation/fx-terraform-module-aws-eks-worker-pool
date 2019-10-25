@@ -42,7 +42,7 @@ module "eks_worker_pool" {
   cluster_certificate       = random_string.this.result
   cluster_endpoint          = random_string.this.result
   cluster_name              = random_string.this.result
-  cluster_security_group_id = data.aws_security_groups.this[0].id
+  cluster_security_group_id = data.aws_security_groups.this.ids[0]
 
   iam_role_name             = random_string.this.result
   iam_instance_profile_name = random_string.this.result
