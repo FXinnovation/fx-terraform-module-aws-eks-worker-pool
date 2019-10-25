@@ -8,7 +8,7 @@ Terraform module that allows you to create EKS worker pools.
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | allowed\_cidr\_blocks | List of CIDR blocks that will be allowed to communicate on high ports with the worker pool. | list | `[]` | no |
-| allowed\_security\_goup\_ids | List of security group ID's that are allowed to communicate on high ports with the worker pool. | list | `[]` | no |
+| allowed\_security\_group\_ids | List of security group ID's that are allowed to communicate on high ports with the worker pool. | list | `[]` | no |
 | ami\_name | Name of the ami that will be used for eks worker nodes. NOTE: If ami is set, this will be ignored. | string | `"amazon-eks-node-1.13*"` | no |
 | associate\_public\_ip\_address | Whether or not to associate public IP's to the worker pool nodes. | string | `"false"` | no |
 | autoscaling\_group\_desired\_capacity | Desired number of nodes in the worker pool. NOTE: Do not specify it if you plan to do autoscaling. | number | `"null"` | no |
