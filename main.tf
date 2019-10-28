@@ -25,7 +25,7 @@ locals {
     "Terraform" = "true"
   }
   vpc_id                     = data.aws_subnet.this.vpc_id
-  allowed_security_group_ids = var.enabled ? concat([var.cluster_security_group_id], var.allowed_security_group_ids) : []
+  allowed_security_group_ids = concat([var.cluster_security_group_id], var.allowed_security_group_ids)
 }
 
 #####
@@ -115,7 +115,7 @@ resource "aws_security_group" "this" {
 }
 
 resource "aws_security_group_rule" "this_ingress_sg_1025_65535" {
-  for_each = toset(local.allowed_security_group_ids)
+  for_each = var.enabled ? toset(local.allowed_security_group_ids) : toset([])
 
   type                     = "ingress"
   from_port                = 1025
@@ -126,7 +126,7 @@ resource "aws_security_group_rule" "this_ingress_sg_1025_65535" {
 }
 
 resource "aws_security_group_rule" "client_egress_sg_1025_65535" {
-  for_each = toset(local.allowed_security_group_ids)
+  for_each = var.enabled ? toset(local.allowed_security_group_ids) : toset([])
 
   type                     = "egress"
   from_port                = 1025
