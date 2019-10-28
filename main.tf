@@ -115,25 +115,25 @@ resource "aws_security_group" "this" {
 }
 
 resource "aws_security_group_rule" "this_ingress_sg_1025_65535" {
-  for_each = var.enabled ? toset(local.allowed_security_group_ids) : toset([])
+  count = var.enabled ? length(local.allowed_security_group_ids) : 0
 
   type                     = "ingress"
   from_port                = 1025
   to_port                  = 65535
   protocol                 = "tcp"
   security_group_id        = element(concat(aws_security_group.this.*.id, list("")), 0)
-  source_security_group_id = each.key
+  source_security_group_id = local.allowed_security_group_ids[count.index]
 }
 
 resource "aws_security_group_rule" "client_egress_sg_1025_65535" {
-  for_each = var.enabled ? toset(local.allowed_security_group_ids) : toset([])
+  count = var.enabled ? length(local.allowed_security_group_ids) : 0
 
   type                     = "egress"
   from_port                = 1025
   to_port                  = 65535
   protocol                 = "tcp"
   source_security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
-  security_group_id        = each.key
+  security_group_id        = local.allowed_security_group_ids[count.index]
 }
 
 resource "aws_security_group_rule" "this_ingress_cidrs_1025_65535" {
