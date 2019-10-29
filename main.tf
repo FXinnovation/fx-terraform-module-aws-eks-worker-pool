@@ -114,6 +114,28 @@ resource "aws_security_group" "this" {
   )
 }
 
+resource "aws_security_group_rule" "this_ingress_sg_443" {
+  count = var.enabled ? length(local.allowed_security_group_ids) : 0
+
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = element(concat(aws_security_group.this.*.id, list("")), 0)
+  source_security_group_id = local.allowed_security_group_ids[count.index]
+}
+
+resource "aws_security_group_rule" "client_egress_sg_443" {
+  count = var.enabled ? length(local.allowed_security_group_ids) : 0
+
+  type                     = "egress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  source_security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
+  security_group_id        = local.allowed_security_group_ids[count.index]
+}
+
 resource "aws_security_group_rule" "this_ingress_sg_1025_65535" {
   count = var.enabled ? length(local.allowed_security_group_ids) : 0
 
