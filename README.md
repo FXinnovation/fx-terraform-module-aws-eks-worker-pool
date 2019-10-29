@@ -33,7 +33,7 @@ Terraform module that allows you to create EKS worker pools.
 | security\_group\_tags | Map of tags that will be applied on the security group for the worker pool nodes. | map | `{}` | no |
 | subnet\_ids | List of subnet ID's that will be used to deploy the EKS worker pool. | list | n/a | yes |
 | tags | Map of tags that will be added on all resources. | map | `{}` | no |
-| use\_max\_pods | Maximum number of pods that will be allowed to be scheduled on each node. | string | `"110"` | no |
+| use\_max\_pods | Maximum number of pods that will be allowed to be scheduled on each node. | string | `"false"` | no |
 
 ## Outputs
 

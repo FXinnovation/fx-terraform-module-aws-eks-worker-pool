@@ -131,5 +131,5 @@ variable "tags" {
 
 variable "use_max_pods" {
   description = "Maximum number of pods that will be allowed to be scheduled on each node."
-  default     = 110
+  default     = "false"
 }
