@@ -34,9 +34,9 @@ variable "autoscaling_group_tags" {
   default     = []
 }
 
-variable "ami_name" {
-  description = "Name of the ami that will be used for eks worker nodes. NOTE: If ami is set, this will be ignored."
-  default     = "amazon-eks-node-1.13*"
+variable "kubernetes_version" {
+  description = "Version of the EKS cluster. Will be used to determine which AMI to use for eks worker nodes. NOTE: If ami is set, this will be ignored."
+  type        = string
 }
 
 variable "associate_public_ip_address" {

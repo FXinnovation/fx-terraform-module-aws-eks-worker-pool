@@ -9,7 +9,6 @@ Terraform module that allows you to create EKS worker pools.
 |------|-------------|:----:|:-----:|:-----:|
 | allowed\_cidr\_blocks | List of CIDR blocks that will be allowed to communicate on high ports with the worker pool. | list | `[]` | no |
 | allowed\_security\_group\_ids | List of security group ID's that are allowed to communicate on high ports with the worker pool. | list | `[]` | no |
-| ami\_name | Name of the ami that will be used for eks worker nodes. NOTE: If ami is set, this will be ignored. | string | `"amazon-eks-node-1.13*"` | no |
 | associate\_public\_ip\_address | Whether or not to associate public IP's to the worker pool nodes. | string | `"false"` | no |
 | autoscaling\_group\_desired\_capacity | Desired number of nodes in the worker pool. NOTE: Do not specify it if you plan to do autoscaling. | number | `"null"` | no |
 | autoscaling\_group\_max\_size | Maximum number of nodes in the worker pool. | string | `"10"` | no |
@@ -27,6 +26,7 @@ Terraform module that allows you to create EKS worker pools.
 | iam\_role\_tags | Map of tags that will be added on the IAM role. | map | `{}` | no |
 | image\_id | ID of the AMI that will be used for the worker nodes. NOTE: Leave empty to use `ami_name` variable. | string | `""` | no |
 | instance\_type | Type of instance that will be used for the worker pool nodes. | string | `"t3.small"` | no |
+| kubernetes\_version | Version of the EKS cluster. Will be used to determine which AMI to use for eks worker nodes. NOTE: If ami is set, this will be ignored. | string | n/a | yes |
 | name\_prefix | Name prefix to use for the launch configuration of the worker pool. | string | `"eks-worker-pool"` | no |
 | security\_group\_ids | List of additionnal security group ids that will be attached to the worker pool nodes. | list | `[]` | no |
 | security\_group\_name | Name of the security group for the worker pool nodes. | string | `"eks-worker-pool"` | no |

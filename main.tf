@@ -9,7 +9,7 @@ data "aws_subnet" "this" {
 data "aws_ami" "this" {
   filter {
     name   = "name"
-    values = [var.ami_name]
+    values = ["amazon-eks-node-${var.kubernetes_version}*"]
   }
 
   most_recent = true

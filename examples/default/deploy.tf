@@ -47,6 +47,8 @@ module "eks_worker_pool" {
   iam_role_name             = random_string.this.result
   iam_instance_profile_name = random_string.this.result
 
+  kubernetes_version = "1.13"
+
   name_prefix = random_string.this.result
 
   security_group_name = random_string.this.result
