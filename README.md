@@ -15,8 +15,6 @@ Terraform module that allows you to create EKS worker pools.
 | autoscaling\_group\_min\_size | Minimum number of nodes in the worker pool. | string | `"2"` | no |
 | autoscaling\_group\_name | Name of the autoscaling group of the worker pool. | string | `"eks-worker-pool"` | no |
 | autoscaling\_group\_tags | List of map of tags of the autoscaling group of the worker pool. NOTE: map format [ { key = STRING, value = STRING, propagate_at_launch = BOOL } ]. | list | `[]` | no |
-| cluster\_certificate | Base 64 encoded string of the certificate of the EKS cluster to be joined by the worker pool nodes. | string | n/a | yes |
-| cluster\_endpoint | Endpoint of the EKS cluster to be joined by the worker pool nodes. | string | n/a | yes |
 | cluster\_name | Name of the EKS cluster to be joined by the worker pool nodes. | string | n/a | yes |
 | cluster\_security\_group\_id | ID of the security group of the EKS cluster. | string | n/a | yes |
 | enabled | Whther or not to enable this worker pool. | string | `"true"` | no |

@@ -44,16 +44,6 @@ variable "associate_public_ip_address" {
   default     = false
 }
 
-variable "cluster_certificate" {
-  description = "Base 64 encoded string of the certificate of the EKS cluster to be joined by the worker pool nodes."
-  type        = string
-}
-
-variable "cluster_endpoint" {
-  description = "Endpoint of the EKS cluster to be joined by the worker pool nodes."
-  type        = string
-}
-
 variable "cluster_name" {
   description = "Name of the EKS cluster to be joined by the worker pool nodes."
   type        = string

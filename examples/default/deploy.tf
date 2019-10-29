@@ -39,8 +39,6 @@ module "eks_worker_pool" {
   # NOTE: These values will not make a functionning cluster. These should be
   # replaced by actual values when used in an actual deployment. But they are
   # sufficient for the purpos of this example.
-  cluster_certificate       = random_string.this.result
-  cluster_endpoint          = random_string.this.result
   cluster_name              = random_string.this.result
   cluster_security_group_id = data.aws_security_groups.this.ids[0]
 

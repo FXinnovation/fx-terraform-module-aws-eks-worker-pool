@@ -46,10 +46,8 @@ resource "aws_launch_configuration" "this" {
     templatefile(
       "${path.module}/templates/userdata.tpl",
       {
-        cluster_name        = var.cluster_name,
-        cluster_endpoint    = var.cluster_endpoint,
-        cluster_certificate = var.cluster_certificate,
-        use_max_pods        = var.use_max_pods
+        cluster_name = var.cluster_name,
+        use_max_pods = var.use_max_pods
       }
     )
   )
