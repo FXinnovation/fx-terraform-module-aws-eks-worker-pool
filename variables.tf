@@ -99,6 +99,12 @@ variable "instance_type" {
   default     = "t3.small"
 }
 
+variable "key_name" {
+  description = "Name of the AWS Key pair to attach to the instances."
+  default     = null
+  type        = string
+}
+
 variable "name_prefix" {
   description = "Name prefix to use for the launch configuration of the worker pool."
   default     = "eks-worker-pool"

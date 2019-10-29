@@ -39,6 +39,7 @@ resource "aws_launch_configuration" "this" {
   iam_instance_profile        = element(concat(aws_iam_instance_profile.this.*.name, list("")), 0)
   image_id                    = var.image_id == "" ? data.aws_ami.this.id : var.image_id
   instance_type               = var.instance_type
+  key_name                    = var.key_name
   name_prefix                 = var.name_prefix
   security_groups             = concat(aws_security_group.this.*.id, var.security_group_ids)
   user_data_base64 = base64encode(

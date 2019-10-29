@@ -26,6 +26,7 @@ Terraform module that allows you to create EKS worker pools.
 | iam\_role\_tags | Map of tags that will be added on the IAM role. | map | `{}` | no |
 | image\_id | ID of the AMI that will be used for the worker nodes. NOTE: Leave empty to use `ami_name` variable. | string | `""` | no |
 | instance\_type | Type of instance that will be used for the worker pool nodes. | string | `"t3.small"` | no |
+| key\_name | Name of the AWS Key pair to attach to the instances. | string | `"null"` | no |
 | kubernetes\_version | Version of the EKS cluster. Will be used to determine which AMI to use for eks worker nodes. NOTE: If ami is set, this will be ignored. | string | n/a | yes |
 | name\_prefix | Name prefix to use for the launch configuration of the worker pool. | string | `"eks-worker-pool"` | no |
 | security\_group\_ids | List of additionnal security group ids that will be attached to the worker pool nodes. | list | `[]` | no |
