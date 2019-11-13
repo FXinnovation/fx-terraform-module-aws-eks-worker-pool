@@ -26,6 +26,16 @@ locals {
   }
   vpc_id                     = data.aws_subnet.this.vpc_id
   allowed_security_group_ids = concat([var.cluster_security_group_id], var.allowed_security_group_ids)
+  aws_auth_data = [
+    {
+      rolearn  = element(concat(aws_iam_role.this.*.arn, list("")), 0)
+      username = "system:node:{{EC2PrivateDNSName}}"
+      groups = [
+        "system:bootstrappers",
+        "system:nodes"
+      ]
+    }
+  ]
 }
 
 #####

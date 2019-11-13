@@ -40,6 +40,7 @@ Terraform module that allows you to create EKS worker pools.
 |------|-------------|
 | autoscaling\_group\_arn | ARN of the autoscaling group that is created. |
 | autoscaling\_group\_id | ID of the autoscaling group that is created. |
+| aws\_auth\_data | List of maps representing the needed config to add to the aws-auth configmap on EKS. |
 | iam\_instance\_profile\_arn | ARN of the IAM instance profile that is created. |
 | iam\_instance\_profile\_id | ID of the IAM instance profile that is created. |
 | iam\_instance\_profile\_name | Name of the IAM instance profile that is created. |

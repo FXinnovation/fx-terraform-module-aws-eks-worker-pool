@@ -72,3 +72,8 @@ output "iam_instance_profile_unique_id" {
   description = "Uniauq ID of the IAM instance profile that is created."
   value       = element(concat(aws_iam_instance_profile.this.*.unique_id, list("")), 0)
 }
+
+output "aws_auth_data" {
+  description = "List of maps representing the needed config to add to the aws-auth configmap on EKS."
+  value       = var.enabled ? local.aws_auth_data : []
+}
