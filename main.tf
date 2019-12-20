@@ -57,7 +57,8 @@ resource "aws_launch_configuration" "this" {
       "${path.module}/templates/userdata.tpl",
       {
         cluster_name = var.cluster_name,
-        use_max_pods = var.use_max_pods
+        use_max_pods = var.use_max_pods,
+        customized_commands = var.customized_commands
       }
     )
   )

@@ -129,3 +129,8 @@ variable "use_max_pods" {
   description = "Maximum number of pods that will be allowed to be scheduled on each node."
   default     = false
 }
+
+variable "customized_commands" {
+  description = "List of shell commands to execute before joining eks cluster"
+  default     = ""
+}
