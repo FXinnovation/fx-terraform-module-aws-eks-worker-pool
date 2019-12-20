@@ -17,6 +17,7 @@ Terraform module that allows you to create EKS worker pools.
 | autoscaling\_group\_tags | List of map of tags of the autoscaling group of the worker pool. NOTE: map format [ { key = STRING, value = STRING, propagate_at_launch = BOOL } ]. | list | `[]` | no |
 | cluster\_name | Name of the EKS cluster to be joined by the worker pool nodes. | string | n/a | yes |
 | cluster\_security\_group\_id | ID of the security group of the EKS cluster. | string | n/a | yes |
+| customized\_commands | List of shell commands to execute before joining eks cluster | string | `""` | no |
 | enabled | Whther or not to enable this worker pool. | string | `"true"` | no |
 | iam\_instance\_profile\_name | Name of the instance profile that will be attached to the worker pool nodes. | string | `"eks-worker-pool"` | no |
 | iam\_role\_name | Name of the IAM role that will be assigned on the worker pool nodes. | string | `"eks-worker-pool"` | no |
