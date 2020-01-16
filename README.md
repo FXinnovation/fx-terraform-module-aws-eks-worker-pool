@@ -14,7 +14,7 @@ Terraform module that allows you to create EKS worker pools.
 | autoscaling\_group\_max\_size | Maximum number of nodes in the worker pool. | string | `"10"` | no |
 | autoscaling\_group\_min\_size | Minimum number of nodes in the worker pool. | string | `"2"` | no |
 | autoscaling\_group\_name | Name of the autoscaling group of the worker pool. | string | `"eks-worker-pool"` | no |
-| autoscaling\_group\_tags | List of map of tags of the autoscaling group of the worker pool. NOTE: map format [ { key = STRING, value = STRING, propagate_at_launch = BOOL } ]. | list | `[]` | no |
+| autoscaling\_group\_tags | List of map of tags of the autoscaling group of the worker pool. NOTE: map format \[ \{ key = STRING, value = STRING, propagate\_at\_launch = BOOL \} \]. | list | `[]` | no |
 | cluster\_name | Name of the EKS cluster to be joined by the worker pool nodes. | string | n/a | yes |
 | cluster\_security\_group\_id | ID of the security group of the EKS cluster. | string | n/a | yes |
 | customized\_commands | List of shell commands to execute before joining eks cluster | string | `""` | no |
@@ -23,7 +23,7 @@ Terraform module that allows you to create EKS worker pools.
 | iam\_role\_name | Name of the IAM role that will be assigned on the worker pool nodes. | string | `"eks-worker-pool"` | no |
 | iam\_role\_policy\_attachment\_arns | List of additionnal policy arns that will be attached to the role of the worker pool nodes. | list | `[]` | no |
 | iam\_role\_tags | Map of tags that will be added on the IAM role. | map | `{}` | no |
-| image\_id | ID of the AMI that will be used for the worker nodes. NOTE: Leave empty to use `ami_name` variable. | string | `""` | no |
+| image\_id | ID of the AMI that will be used for the worker nodes. NOTE: Leave empty to use `ami\_name` variable. | string | `""` | no |
 | instance\_type | Type of instance that will be used for the worker pool nodes. | string | `"t3.small"` | no |
 | key\_name | Name of the AWS Key pair to attach to the instances. | string | `"null"` | no |
 | kubernetes\_version | Version of the EKS cluster. Will be used to determine which AMI to use for eks worker nodes. NOTE: If ami is set, this will be ignored. | string | n/a | yes |
@@ -31,6 +31,7 @@ Terraform module that allows you to create EKS worker pools.
 | security\_group\_ids | List of additionnal security group ids that will be attached to the worker pool nodes. | list | `[]` | no |
 | security\_group\_name | Name of the security group for the worker pool nodes. | string | `"eks-worker-pool"` | no |
 | security\_group\_tags | Map of tags that will be applied on the security group for the worker pool nodes. | map | `{}` | no |
+| spot\_price | The maximum price to use for reserving spot instances. | string | `"null"` | no |
 | subnet\_ids | List of subnet ID's that will be used to deploy the EKS worker pool. | list | n/a | yes |
 | tags | Map of tags that will be added on all resources. | map | `{}` | no |
 | use\_max\_pods | Maximum number of pods that will be allowed to be scheduled on each node. | string | `"false"` | no |

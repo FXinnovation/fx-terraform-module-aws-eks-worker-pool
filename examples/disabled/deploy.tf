@@ -34,6 +34,8 @@ resource "random_string" "this" {
 module "eks_worker_pool" {
   source = "../../"
 
+  enabled = false
+
   autoscaling_group_name = random_string.this.result
 
   # NOTE: These values will not make a functionning cluster. These should be

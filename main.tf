@@ -52,6 +52,7 @@ resource "aws_launch_configuration" "this" {
   key_name                    = var.key_name
   name_prefix                 = var.name_prefix
   security_groups             = concat(aws_security_group.this.*.id, var.security_group_ids)
+  spot_price                  = var.spot_price
   user_data_base64 = base64encode(
     templatefile(
       "${path.module}/templates/userdata.tpl",

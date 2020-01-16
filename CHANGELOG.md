@@ -1,4 +1,11 @@
 
+1.2.0 / 2020-01-16
+==================
+
+  * Add spot-price variable and examples
+  * run pre-commit
+  * Add a way to execute custom commands before launching script bootstrap.sh
+
 1.1.0 / 2019-11-13
 ==================
 

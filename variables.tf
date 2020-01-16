@@ -115,6 +115,12 @@ variable "security_group_tags" {
   default     = {}
 }
 
+variable "spot_price" {
+  description = "The maximum price to use for reserving spot instances."
+  default     = null
+  type        = string
+}
+
 variable "subnet_ids" {
   description = "List of subnet ID's that will be used to deploy the EKS worker pool."
   type        = list
