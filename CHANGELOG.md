@@ -1,8 +1,13 @@
 
+1.3.0 / 2020-01-28
+==================
+
+  * feat: Add additional EKS bootstrap arguments
+
 1.2.0 / 2020-01-16
 ==================
 
-  * Add spot-price variable and examples
+  * feature: Add spot-price variable and examples
   * run pre-commit
   * Add a way to execute custom commands before launching script bootstrap.sh
 

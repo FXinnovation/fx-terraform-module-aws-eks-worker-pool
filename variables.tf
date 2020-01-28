@@ -1,3 +1,8 @@
+variable "additional_bootstrap_arguments" {
+  description = "Additionnal arguments to pass to the EKS bootstrap script (from AWS)."
+  default     = ""
+}
+
 variable "allowed_security_group_ids" {
   description = "List of security group ID's that are allowed to communicate on high ports with the worker pool."
   default     = []
