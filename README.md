@@ -44,6 +44,7 @@ Terraform module that allows you to create EKS worker pools.
 | use\_max\_pods | Maximum number of pods that will be allowed to be scheduled on each node. | `bool` | `false` | no |
 | volume\_size | Root block device volume size. | `number` | `50` | no |
 | volume\_type | Root block device volume type. | `string` | `"standard"` | no |
+| worker\_pool\_security\_group\_ids | List of security group ids of the other worker pools available on the cluster. | `list` | `[]` | no |
 
 ## Outputs
 

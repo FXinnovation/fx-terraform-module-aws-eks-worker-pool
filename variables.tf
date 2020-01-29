@@ -155,3 +155,8 @@ variable "volume_size" {
   description = "Root block device volume size."
   default     = 50
 }
+
+variable "worker_pool_security_group_ids" {
+  description = "List of security group ids of the other worker pools available on the cluster."
+  default     = []
+}

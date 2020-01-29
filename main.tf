@@ -211,6 +211,17 @@ resource "aws_security_group_rule" "this_ingress_self_any" {
   security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
 }
 
+resource "aws_security_group_rule" "this_ingress_worker_pools_any" {
+  count = var.enabled ? length(var.worker_pool_security_group_ids) : 0
+
+  type                     = "ingress"
+  from_port                = 0
+  to_port                  = 0
+  protocol                 = "-1"
+  security_group_id        = element(concat(aws_security_group.this.*.id, list("")), 0)
+  source_security_group_id = var.worker_pool_security_group_ids[count.index]
+}
+
 # NOTE: This might not be usefull or necessary but is what is usually done.
 resource "aws_security_group_rule" "this_egress_any" {
   count = var.enabled ? 1 : 0
