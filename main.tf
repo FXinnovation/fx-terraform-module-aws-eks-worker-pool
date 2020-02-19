@@ -106,6 +106,20 @@ resource "aws_autoscaling_group" "this" {
       propagate_at_launch = tag.value.propagate_at_launch
     }
   }
+
+  depends_on = [
+    aws_security_group_rule.this_ingress_sg_443,
+    aws_security_group_rule.client_egress_sg_443,
+    aws_security_group_rule.this_ingress_sg_1025_65535,
+    aws_security_group_rule.client_egress_sg_1025_65535,
+    aws_security_group_rule.this_ingress_cidrs_1025_65535,
+    aws_security_group_rule.this_ingress_self_any,
+    aws_security_group_rule.this_egress_any,
+    aws_iam_role_policy_attachment.this_node_policy,
+    aws_iam_role_policy_attachment.this_cni_policy,
+    aws_iam_role_policy_attachment.this_container_registry,
+    aws_iam_role_policy_attachment.this
+  ]
 }
 
 #####
