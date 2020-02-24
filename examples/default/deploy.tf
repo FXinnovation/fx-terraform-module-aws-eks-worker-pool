@@ -18,6 +18,11 @@ data "aws_security_groups" "this" {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
   }
+
+  filter {
+    name   = "group-name"
+    values = ["default"]
+  }
 }
 
 data "aws_subnet_ids" "this" {
