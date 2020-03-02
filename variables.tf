@@ -145,3 +145,13 @@ variable "customized_commands" {
   description = "List of shell commands to execute before joining eks cluster"
   default     = ""
 }
+
+variable "volume_type" {
+  description = "Root block device volume type."
+  default     = "standard"
+}
+
+variable "volume_size" {
+  description = "Root block device volume size."
+  default     = 50
+}

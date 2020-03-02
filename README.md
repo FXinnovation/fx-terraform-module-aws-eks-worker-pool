@@ -42,6 +42,8 @@ Terraform module that allows you to create EKS worker pools.
 | subnet\_ids | List of subnet ID's that will be used to deploy the EKS worker pool. | `list` | n/a | yes |
 | tags | Map of tags that will be added on all resources. | `map` | `{}` | no |
 | use\_max\_pods | Maximum number of pods that will be allowed to be scheduled on each node. | `bool` | `false` | no |
+| volume\_size | Root block device volume size. | `number` | `50` | no |
+| volume\_type | Root block device volume type. | `string` | `"standard"` | no |
 
 ## Outputs
 

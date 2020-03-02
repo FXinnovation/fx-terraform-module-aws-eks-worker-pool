@@ -1,7 +1,14 @@
-1.4.1 / 2020-02-19
+
+2.0.0 / 2020-03-02
 ==================
 
-  * feat: Add dependencies for clean destroy
+  * breaking: Add some block device options
+
+1.4.0 / 2020-02-24
+==================
+
+  * fix/ tests
+  * feat/ add dependencies
 
 1.3.1 / 2020-01-28
 ==================
