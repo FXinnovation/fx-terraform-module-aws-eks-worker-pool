@@ -2,6 +2,7 @@
 3.0.0 / 2020-09-24
 ==================
 
+  * maintenance: (BREAKING) Add versions.tf file
   * feat: Add asg metric collection options
   * chore: Update pre-commit configuration
 

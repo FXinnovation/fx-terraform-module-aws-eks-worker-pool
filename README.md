@@ -5,13 +5,16 @@ Terraform module that allows you to create EKS worker pools.
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.13 |
+| aws | >= 2.27 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | >= 2.27 |
 
 ## Inputs
 
@@ -22,6 +25,7 @@ No requirements.
 | allowed\_security\_group\_ids | List of security group ID's that are allowed to communicate on high ports with the worker pool. | `list` | `[]` | no |
 | associate\_public\_ip\_address | Whether or not to associate public IP's to the worker pool nodes. | `bool` | `false` | no |
 | autoscaling\_group\_desired\_capacity | Desired number of nodes in the worker pool. NOTE: Do not specify it if you plan to do autoscaling. | `number` | `null` | no |
+| autoscaling\_group\_enabled\_metrics | A list of metrics to collect. The allowed values are GroupDesiredCapacity, GroupInServiceCapacity, GroupPendingCapacity, GroupMinSize, GroupMaxSize, GroupInServiceInstances, GroupPendingInstances, GroupStandbyInstances, GroupStandbyCapacity, GroupTerminatingCapacity, GroupTerminatingInstances, GroupTotalCapacity, GroupTotalInstances. | `list(string)` | `[]` | no |
 | autoscaling\_group\_max\_size | Maximum number of nodes in the worker pool. | `number` | `10` | no |
 | autoscaling\_group\_min\_size | Minimum number of nodes in the worker pool. | `number` | `2` | no |
 | autoscaling\_group\_name | Name of the autoscaling group of the worker pool. | `string` | `"eks-worker-pool"` | no |
