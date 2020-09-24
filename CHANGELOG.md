@@ -1,5 +1,10 @@
 
-2.1.0 / 2020-03-03
+2.2.0 / 2020-09-24
+==================
+
+  * chore: Update pre-commit configuration
+
+2.1.0 / 2020-01-29
 ==================
 
   * feat: Allow for multiple worker pools
