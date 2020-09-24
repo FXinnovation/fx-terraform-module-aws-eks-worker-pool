@@ -84,6 +84,7 @@ resource "aws_autoscaling_group" "this" {
   min_size             = var.autoscaling_group_min_size
   name                 = var.autoscaling_group_name
   vpc_zone_identifier  = var.subnet_ids
+  enabled_metrics      = var.autoscaling_group_enabled_metrics
 
   tag {
     key                 = "Name"

@@ -60,4 +60,9 @@ module "eks_worker_pool" {
   security_group_name = random_string.this.result
 
   subnet_ids = tolist(data.aws_subnet_ids.this.ids)
+
+  autoscaling_group_enabled_metrics = [
+    "GroupPendingInstances",
+    "GroupInServiceInstances"
+  ]
 }

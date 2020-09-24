@@ -1,7 +1,8 @@
 
-2.2.0 / 2020-09-24
+3.0.0 / 2020-09-24
 ==================
 
+  * feat: Add asg metric collection options
   * chore: Update pre-commit configuration
 
 2.1.0 / 2020-01-29

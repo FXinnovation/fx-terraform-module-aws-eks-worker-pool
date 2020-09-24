@@ -13,6 +13,34 @@ variable "allowed_cidr_blocks" {
   default     = []
 }
 
+vairable "autoscaling_group_enabled_metrics" {
+  description = "A list of metrics to collect. The allowed values are GroupDesiredCapacity, GroupInServiceCapacity, GroupPendingCapacity, GroupMinSize, GroupMaxSize, GroupInServiceInstances, GroupPendingInstances, GroupStandbyInstances, GroupStandbyCapacity, GroupTerminatingCapacity, GroupTerminatingInstances, GroupTotalCapacity, GroupTotalInstances."
+  default     = []
+  type        = list(string)
+
+  validation {
+    condition = contains(
+      [
+        "GroupDesiredCapacity",
+        "GroupInServiceCapacity",
+        "GroupPendingCapacity",
+        "GroupMinSize",
+        "GroupMaxSize",
+        "GroupInServiceInstances",
+        "GroupPendingInstances",
+        "GroupStandbyInstances",
+        "GroupStandbyCapacity",
+        "GroupTerminatingCapacity",
+        "GroupTerminatingInstances",
+        "GroupTotalCapacity",
+        "GroupTotalInstances"
+      ],
+      var.autoscaling_group_enabled_metrics
+    )
+    error_message = "The var.autoscaling_group_enabled_metrics allowed values are GroupDesiredCapacity, GroupInServiceCapacity, GroupPendingCapacity, GroupMinSize, GroupMaxSize, GroupInServiceInstances, GroupPendingInstances  , GroupStandbyInstances, GroupStandbyCapacity, GroupTerminatingCapacity, GroupTerminatingInstances, GroupTotalCapacity, GroupTotalInstances."
+  }
+}
+
 variable "autoscaling_group_desired_capacity" {
   description = "Desired number of nodes in the worker pool. NOTE: Do not specify it if you plan to do autoscaling."
   default     = null
