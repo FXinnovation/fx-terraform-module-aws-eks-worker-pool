@@ -43,7 +43,7 @@ Terraform module that allows you to create EKS worker pools.
 | key\_name | Name of the AWS Key pair to attach to the instances. | `string` | `null` | no |
 | kubernetes\_version | Version of the EKS cluster. Will be used to determine which AMI to use for eks worker nodes. NOTE: If ami is set, this will be ignored. | `string` | n/a | yes |
 | name\_prefix | Name prefix to use for the launch configuration of the worker pool. | `string` | `"eks-worker-pool"` | no |
-| security\_group\_ids | List of additionnal security group ids that will be attached to the worker pool nodes. | `list` | `[]` | no |
+| security\_group\_ids | List of security group ids that will be attached to the worker pool nodes. | `list` | `[]` | no |
 | security\_group\_name | Name of the security group for the worker pool nodes. | `string` | `"eks-worker-pool"` | no |
 | security\_group\_tags | Map of tags that will be applied on the security group for the worker pool nodes. | `map` | `{}` | no |
 | spot\_price | The maximum price to use for reserving spot instances. | `string` | `null` | no |
@@ -71,8 +71,5 @@ Terraform module that allows you to create EKS worker pools.
 | iam\_role\_unique\_id | Uniauq ID of the IAM role that is created. |
 | launch\_configuration\_id | ID of the launch configruation that is created. |
 | launch\_configuration\_name | Name of the launch configruation that is created. |
-| security\_group\_arn | ARN of the security group that is created. |
-| security\_group\_id | ID of the security group that is created. |
-| security\_group\_name | Name of the security group that is created. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -51,7 +51,7 @@ resource "aws_launch_configuration" "this" {
   instance_type               = var.instance_type
   key_name                    = var.key_name
   name_prefix                 = var.name_prefix
-  security_groups             = concat(aws_security_group.this.*.id, var.security_group_ids)
+  security_groups             = var.security_group_ids
   spot_price                  = var.spot_price
   user_data_base64 = base64encode(
     templatefile(
@@ -114,125 +114,11 @@ resource "aws_autoscaling_group" "this" {
   }
 
   depends_on = [
-    aws_security_group_rule.this_ingress_sg_443,
-    aws_security_group_rule.client_egress_sg_443,
-    aws_security_group_rule.this_ingress_sg_1025_65535,
-    aws_security_group_rule.client_egress_sg_1025_65535,
-    aws_security_group_rule.this_ingress_cidrs_1025_65535,
-    aws_security_group_rule.this_ingress_self_any,
-    aws_security_group_rule.this_egress_any,
     aws_iam_role_policy_attachment.this_node_policy,
     aws_iam_role_policy_attachment.this_cni_policy,
     aws_iam_role_policy_attachment.this_container_registry,
     aws_iam_role_policy_attachment.this
   ]
-}
-
-#####
-# Security Group
-#####
-
-resource "aws_security_group" "this" {
-  count = var.enabled ? 1 : 0
-
-  name        = var.security_group_name
-  description = "Security group for EKS workers."
-  vpc_id      = local.vpc_id
-
-  tags = merge(
-    local.tags,
-    var.tags,
-    var.security_group_tags
-  )
-}
-
-resource "aws_security_group_rule" "this_ingress_sg_443" {
-  count = var.enabled ? length(local.allowed_security_group_ids) : 0
-
-  type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = element(concat(aws_security_group.this.*.id, list("")), 0)
-  source_security_group_id = local.allowed_security_group_ids[count.index]
-}
-
-resource "aws_security_group_rule" "client_egress_sg_443" {
-  count = var.enabled ? length(local.allowed_security_group_ids) : 0
-
-  type                     = "egress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  source_security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
-  security_group_id        = local.allowed_security_group_ids[count.index]
-}
-
-resource "aws_security_group_rule" "this_ingress_sg_1025_65535" {
-  count = var.enabled ? length(local.allowed_security_group_ids) : 0
-
-  type                     = "ingress"
-  from_port                = 1025
-  to_port                  = 65535
-  protocol                 = "tcp"
-  security_group_id        = element(concat(aws_security_group.this.*.id, list("")), 0)
-  source_security_group_id = local.allowed_security_group_ids[count.index]
-}
-
-resource "aws_security_group_rule" "client_egress_sg_1025_65535" {
-  count = var.enabled ? length(local.allowed_security_group_ids) : 0
-
-  type                     = "egress"
-  from_port                = 1025
-  to_port                  = 65535
-  protocol                 = "tcp"
-  source_security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
-  security_group_id        = local.allowed_security_group_ids[count.index]
-}
-
-resource "aws_security_group_rule" "this_ingress_cidrs_1025_65535" {
-  count = var.enabled && length(var.allowed_cidr_blocks) > 0 ? 1 : 0
-
-  type              = "ingress"
-  from_port         = 1025
-  to_port           = 65535
-  protocol          = "tcp"
-  security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
-  cidr_blocks       = var.allowed_cidr_blocks
-}
-
-resource "aws_security_group_rule" "this_ingress_self_any" {
-  count = var.enabled ? 1 : 0
-
-  type              = "ingress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  self              = true
-  security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
-}
-
-resource "aws_security_group_rule" "this_ingress_worker_pools_any" {
-  count = var.enabled ? length(var.worker_pool_security_group_ids) : 0
-
-  type                     = "ingress"
-  from_port                = 0
-  to_port                  = 0
-  protocol                 = "-1"
-  security_group_id        = element(concat(aws_security_group.this.*.id, list("")), 0)
-  source_security_group_id = var.worker_pool_security_group_ids[count.index]
-}
-
-# NOTE: This might not be usefull or necessary but is what is usually done.
-resource "aws_security_group_rule" "this_egress_any" {
-  count = var.enabled ? 1 : 0
-
-  type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = element(concat(aws_security_group.this.*.id, list("")), 0)
 }
 
 #####

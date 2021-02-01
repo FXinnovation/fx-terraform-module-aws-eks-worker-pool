@@ -117,7 +117,7 @@ variable "name_prefix" {
 }
 
 variable "security_group_ids" {
-  description = "List of additionnal security group ids that will be attached to the worker pool nodes."
+  description = "List of security group ids that will be attached to the worker pool nodes."
   default     = []
 }
 

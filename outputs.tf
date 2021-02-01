@@ -18,21 +18,6 @@ output "autoscaling_group_arn" {
   value       = element(concat(aws_autoscaling_group.this.*.arn, list("")), 0)
 }
 
-output "security_group_name" {
-  description = "Name of the security group that is created."
-  value       = element(concat(aws_security_group.this.*.name, list("")), 0)
-}
-
-output "security_group_id" {
-  description = "ID of the security group that is created."
-  value       = element(concat(aws_security_group.this.*.id, list("")), 0)
-}
-
-output "security_group_arn" {
-  description = "ARN of the security group that is created."
-  value       = element(concat(aws_security_group.this.*.arn, list("")), 0)
-}
-
 output "iam_role_name" {
   description = "Name of the IAM role that is created."
   value       = element(concat(aws_iam_role.this.*.name, list("")), 0)

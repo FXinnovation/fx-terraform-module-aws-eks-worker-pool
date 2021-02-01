@@ -1,3 +1,8 @@
+4.0.0 / 2020-09-24
+==================
+
+  * maintenance: (BREAKING) Remove SG creation from this module (only attach existing ones)
+  * chore: bump pre-commit hooks
 
 3.0.0 / 2020-09-24
 ==================
