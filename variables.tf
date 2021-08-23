@@ -139,7 +139,7 @@ variable "spot_price" {
 
 variable "subnet_ids" {
   description = "List of subnet ID's that will be used to deploy the EKS worker pool."
-  type        = list
+  type        = list(any)
 }
 
 variable "tags" {
