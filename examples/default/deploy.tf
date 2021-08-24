@@ -1,13 +1,3 @@
-provider "aws" {
-  region     = "us-east-2"
-  access_key = var.access_key
-  secret_key = var.secret_key
-}
-
-provider "random" {
-  version = "~> 2.0"
-}
-
 data "aws_vpc" "default" {
   default = true
 }
