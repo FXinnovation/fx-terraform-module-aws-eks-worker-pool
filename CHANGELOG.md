@@ -1,3 +1,23 @@
+
+5.0.0 / 2021-09-01
+==================
+
+* (BREAKING) chore: pins pre-commit-hooks to v4.0.1.
+* feat: add pre-commit-afcmf (v0.1.2).
+* chore: pins pre-commit-terraform to v1.50.0.
+* chore: pins terraform to >= 0.14.
+* chore: pins aws provider to >= 3.1.
+* chore: bumps terraform + providers versions in example:
+  * pins terraform to >= 0.14.
+  * pins aws provider to >= 3.0.
+  * (BREAKING) pins random provider to >= 3.0.
+* refactor: move providers in providers.tf file in examples.
+* refactor: add versions.tf file in examples.
+* doc: add README.md file in examples.
+* refactor: get rid of disabled example.
+* refactor: lint code in example test cases.
+* refactor: lint code in root module.
+
 4.0.0 / 2020-09-24
 ==================
 
