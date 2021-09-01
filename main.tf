@@ -16,16 +16,15 @@ data "aws_ami" "this" {
   owners      = ["602401143452"] # Amazon EKS AMI Account ID
 }
 
+
 #####
 # Locals
 #####
 
 locals {
-  tags = {
-    "Terraform" = "true"
-  }
   vpc_id                     = data.aws_subnet.this.vpc_id
   allowed_security_group_ids = concat([var.cluster_security_group_id], var.allowed_security_group_ids)
+
   aws_auth_data = [
     {
       rolearn  = element(concat(aws_iam_role.this.*.arn, list("")), 0)
@@ -36,7 +35,12 @@ locals {
       ]
     }
   ]
+
+  tags = {
+    "Terraform" = "true"
+  }
 }
+
 
 #####
 # ASG
@@ -53,6 +57,7 @@ resource "aws_launch_configuration" "this" {
   name_prefix                 = var.name_prefix
   security_groups             = var.security_group_ids
   spot_price                  = var.spot_price
+
   user_data_base64 = base64encode(
     templatefile(
       "${path.module}/templates/userdata.tpl",
