@@ -6,7 +6,7 @@
 * feat: add pre-commit-afcmf (v0.1.2).
 * chore: pins pre-commit-terraform to v1.50.0.
 * chore: pins terraform to >= 0.14.
-* chore: pins aws provider to >= 3.1.
+* chore: pins aws provider to >= 3.0.
 * chore: bumps terraform + providers versions in example:
   * pins terraform to >= 0.14.
   * pins aws provider to >= 3.0.
