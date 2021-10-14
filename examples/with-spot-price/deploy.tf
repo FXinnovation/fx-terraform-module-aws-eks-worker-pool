@@ -42,7 +42,7 @@ module "eks_worker_pool" {
 
   spot_price = "1.000"
 
-  kubernetes_version = "1.13"
+  kubernetes_version = "1.21"
 
   name_prefix = random_string.this.result
 
