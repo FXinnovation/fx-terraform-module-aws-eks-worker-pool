@@ -27,7 +27,7 @@ locals {
 
   aws_auth_data = [
     {
-      rolearn  = element(concat(aws_iam_role.this.*.arn, list("")), 0)
+      rolearn  = element(concat(aws_iam_role.this.*.arn, []), 0)
       username = "system:node:{{EC2PrivateDNSName}}"
       groups = [
         "system:bootstrappers",
@@ -50,7 +50,7 @@ resource "aws_launch_configuration" "this" {
   count = var.enabled ? 1 : 0
 
   associate_public_ip_address = var.associate_public_ip_address
-  iam_instance_profile        = element(concat(aws_iam_instance_profile.this.*.name, list("")), 0)
+  iam_instance_profile        = element(concat(aws_iam_instance_profile.this.*.name, []), 0)
   image_id                    = var.image_id == "" ? data.aws_ami.this.id : var.image_id
   instance_type               = var.instance_type
   key_name                    = var.key_name
@@ -84,7 +84,7 @@ resource "aws_autoscaling_group" "this" {
   count = var.enabled ? 1 : 0
 
   desired_capacity     = var.autoscaling_group_desired_capacity
-  launch_configuration = element(concat(aws_launch_configuration.this.*.id, list("")), 0)
+  launch_configuration = element(concat(aws_launch_configuration.this.*.id, []), 0)
   max_size             = var.autoscaling_group_max_size
   min_size             = var.autoscaling_group_min_size
   name                 = var.autoscaling_group_name
@@ -159,33 +159,33 @@ resource "aws_iam_role_policy_attachment" "this_node_policy" {
   count = var.enabled ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = element(concat(aws_iam_role.this.*.name, list("")), 0)
+  role       = element(concat(aws_iam_role.this.*.name, []), 0)
 }
 
 resource "aws_iam_role_policy_attachment" "this_cni_policy" {
   count = var.enabled ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = element(concat(aws_iam_role.this.*.name, list("")), 0)
+  role       = element(concat(aws_iam_role.this.*.name, []), 0)
 }
 
 resource "aws_iam_role_policy_attachment" "this_container_registry" {
   count = var.enabled ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = element(concat(aws_iam_role.this.*.name, list("")), 0)
+  role       = element(concat(aws_iam_role.this.*.name, []), 0)
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
   for_each = toset(var.iam_role_policy_attachment_arns)
 
   policy_arn = each.key
-  role       = element(concat(aws_iam_role.this.*.name, list("")), 0)
+  role       = element(concat(aws_iam_role.this.*.name, []), 0)
 }
 
 resource "aws_iam_instance_profile" "this" {
   count = var.enabled ? 1 : 0
 
   name = var.iam_instance_profile_name
-  role = element(concat(aws_iam_role.this.*.name, list("")), 0)
+  role = element(concat(aws_iam_role.this.*.name, []), 0)
 }
